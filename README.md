@@ -1,0 +1,2 @@
+# AutoFunction
+auto test
