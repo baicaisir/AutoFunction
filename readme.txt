@@ -21,3 +21,8 @@ pytest test_se.py --reruns NUM
     使用-m "mark1 and not mark2"选中带哟与mark1的测试用例，而过滤掉带有mark2的测试用例
     使用-m "mark1 or mark2"则选中带有mark1或者mark2的所有测试用例 """
 
+allure格式报告
+#执行以下命令会输出一份测试报告的原始文件
+pytest —alluredir ./report/allure_raw
+#执行一下命令可以将报告用HTML格式打开
+allure serve report/allure_raw

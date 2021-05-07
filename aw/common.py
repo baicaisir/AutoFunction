@@ -3,13 +3,13 @@ import re
 
 from model import Model
 # 抓取iOS的log
-def logcatIos():
+def logcatIos(logname='iphone.log'):
     '''
     :function:抓取iPhone的log
     :return:
     '''
     # p = subprocess.Popen('idevice_id -l',shell=True)
-    p = subprocess.Popen('idevicesyslog > iphone.log ',shell=True,cwd=Model.logdirpath,)
+    p = subprocess.Popen('idevicesyslog > %s '%logname,shell=True,cwd=Model.logdirpath,)
     return p.pid
 
 # 日志抓取完成，杀掉进程
@@ -37,6 +37,29 @@ def logKeywordExist(pattern,filepath):
     with open(file=filepath,encoding='utf-8') as f:
         for i in f:
             wordlist += re.compile(pattern).findall(i)
+    wordlist = list(set(wordlist))
+    wordlist.sort()
+    print(wordlist)
+    # print(f'\033[0;32;47m{wordlist}\033[0m')
+    return wordlist
+
+    # 从log中匹配关键字
+def logBlockKeywordExist(pattern,filepath,blocksize = 1*1024*1024):
+    '''
+    ：function :按照数据块大小匹配关键字
+    :param pattern: 正则匹配规则
+    :param filepath: log文件的路径
+    :return: 返回去重升序后的匹配结果列表
+    '''
+    # if pattern1:
+    #     subprocess.call('cat %s | grep %s > iphonelimit.log'%(filepath,pattern1),cwd=Model.logdirpath,shell=True)
+    #     filepath = Model.logdirpath+'iphonelimit.log'
+    wordlist = []
+    with open(file=filepath,encoding='utf-8') as f:
+        buffer = -1
+        while buffer:
+            buffer = f.read(blocksize)
+            wordlist += re.compile(pattern).findall(buffer)
     wordlist = list(set(wordlist))
     wordlist.sort()
     print(wordlist)
