@@ -1,3 +1,10 @@
+工程整体结构：
+report：存放执行日志
+aw(Action Word)：存放功能函数
+model：常量定义，便于维护
+resource：存放一些生成的log，或者需要使用的资源文件，例如apk
+scripts：存放脚本
+
 
 脚本执行命令：
 pytest script --html=report/report.html

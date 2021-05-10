@@ -1,6 +1,7 @@
 from aw import common
 import time
 import pytest
+import subprocess
 
 
 def logcat():
@@ -10,14 +11,18 @@ def logcat():
 
     # subprocess.call('pytest --pyargs scripts',shell=True)
 
-
+#获取当前时间年月日时分秒，用于创建输出日志存放的文件夹
 filetime = time.strftime("%Y%m%d%H%M%S", time.localtime())
 print(filetime)
 
 if __name__ == '__main__':
-    logcat()
-    #pytest-HTML报告
-    #pytest.main(['-v','-k test', 'scripts/test_pytest.py', f'--html=report/{filetime}/report.html'])
+    # logcat()
+    # subprocess.call('pytest  scripts/test_firebase.py',shell=True)
 
-    #allure-pytest报告
-    # pytest.main(['--alluredir',f'./report/{filetime}/allure_raw','scripts/test_pytest.py'])
+    #pytest-HTML报告
+    # pytest.main(['-v','-k test', 'scripts/test_firebase.py', f'--html=report/{filetime}/report.html'])
+
+
+    #allure-pytest报告--
+    pytest.main(['--alluredir',f'./report/{filetime}/allure_raw','scripts/test_firebase.py'])
+    subprocess.call(f'allure  serve ./report/{filetime}/allure_raw', shell=True)

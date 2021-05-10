@@ -51,9 +51,6 @@ def logBlockKeywordExist(pattern,filepath,blocksize = 1*1024*1024):
     :param filepath: log文件的路径
     :return: 返回去重升序后的匹配结果列表
     '''
-    # if pattern1:
-    #     subprocess.call('cat %s | grep %s > iphonelimit.log'%(filepath,pattern1),cwd=Model.logdirpath,shell=True)
-    #     filepath = Model.logdirpath+'iphonelimit.log'
     wordlist = []
     with open(file=filepath,encoding='utf-8') as f:
         buffer = -1
@@ -62,7 +59,7 @@ def logBlockKeywordExist(pattern,filepath,blocksize = 1*1024*1024):
             wordlist += re.compile(pattern).findall(buffer)
     wordlist = list(set(wordlist))
     wordlist.sort()
-    print(wordlist)
+    # print(wordlist)
     # print(f'\033[0;32;47m{wordlist}\033[0m')
     return wordlist
 
