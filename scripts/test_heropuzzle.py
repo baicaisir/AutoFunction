@@ -3,7 +3,7 @@ from model import Model
 import pytest
 
 # 从lo文件中匹配关键字
-wordlist = common.logKeywordExist(Model.pattern, '%siphone.log'%Model.logdirpath)
+wordlist = common.logKeywordExist(Model.pattern, '%sheropuzzle.log'%Model.logdirpath)
 
 # level_complete关卡  --需要根据实际通关关卡来设定相关参数
 testlist = common.keywordLogZip(wordlist,Model.level_enter,5)+\

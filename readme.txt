@@ -11,7 +11,8 @@ pytest script --html=report/report.html
 
 [--html=report/report.html]  日志
 
-pytest.ini文件最好用ANSI编码方式创建
+pytest.ini文件最好用UTF-8编码方式创建
+MAC的编码方式不同，新建文件可能会导致程序执行编码错误
 
 重试运行cases
 某些情况来说可以通过重试运行cases的方式来解决

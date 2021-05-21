@@ -6,6 +6,7 @@
 
 from aw import common
 from model import Model
+import allure
 
 
 class Testfirebase():
@@ -15,11 +16,12 @@ class Testfirebase():
         banner = common.logBlockKeywordExist(Model.banner_nox_sdk_waterfall_request, Model.firebaselog)
         assert banner != []
 
-
+    @allure.story('插屏广告瀑布流')
     def test_int_nox_sdk_waterfall(self):
         Interstitial = common.logBlockKeywordExist(Model.int_nox_sdk_waterfall_request, Model.firebaselog)
         assert Interstitial != []
 
+    @allure.story('激励广告瀑布流')
     def test_reward_nox_sdk_waterfall(self):
         Reward = common.logBlockKeywordExist(Model.reward_nox_sdk_waterfall_request, Model.firebaselog)
         assert  Reward != []
