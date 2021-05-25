@@ -13,7 +13,7 @@ import os
 import subprocess
 import platform
 
-class BaseView(object):
+class BaseView:
     def __init__(self,driver):
         self.driver = driver
 
@@ -57,9 +57,9 @@ class BaseView(object):
     #     '''启动应用'''
     #     app_package,app_activity = activity.split('/')
     #     self.driver.start_activity(app_package,app_activity)
-    # def getclasses(self,classname,index = 0):
-    #     buttons = self.driver.find_elements_by_class_name(classname)
-    #     return buttons[index]
+    def getclasses(self,classname,index = 0):
+        buttons = self.driver.find_elements_by_class_name(classname)
+        return buttons[index]
 
 
 
