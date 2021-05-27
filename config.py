@@ -5,13 +5,11 @@
 # @Software: PyCharm
 
 
-
-
 desired_caps = {
     "deviceName": "127.0.0.1:62001",
     "platformName": "Android",
-    "appPackage": "com.coolapk.market",
-    "appActivity": "com.coolapk.market.view.main.MainActivity",
+    # "appPackage": "com.coolapk.market",
+    # "appActivity": "com.coolapk.market.view.main.MainActivity",
     'noReset': 'true',
     'automationName': 'UiAutomator2'
-}
+    }

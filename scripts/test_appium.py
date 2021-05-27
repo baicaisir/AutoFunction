@@ -9,11 +9,10 @@ from model import Model
 from baseview import BaseView
 
 
-class Testfirebase():
+class TestNoxmobi():
 
-    '''  nox_sdk_waterfall 瀑布流请求打点  '''
-    def test_banner_nox_sdk_waterfall(self):
-        a = common.getclass('android.widget.TextView',3).text
-        print(dir(a))
+    ''' setup  '''
+    def test_setup(self):
+        a = common.getClassProperty('android.widget.TextView',3).text
         print(a)
-        assert a ==  '酷安'
+        common.checkValue(True)
