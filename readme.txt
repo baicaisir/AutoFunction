@@ -34,3 +34,6 @@ allure格式报告
 pytest —alluredir ./report/allure_raw
 #执行一下命令可以将报告用HTML格式打开
 allure serve report/allure_raw
+
+mac通过.app安装应用
+xcrun simctl install booted NoxmibiDemo.app

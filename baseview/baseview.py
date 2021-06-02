@@ -3,6 +3,7 @@
 # @Author  : 
 # @File    : baseview.py
 # @Software: PyCharm
+import time
 
 class BaseView:
     def __init__(self,  driver):
@@ -56,3 +57,34 @@ class BaseView:
 
     def clickByid(self, idname, index):
         return self.driver.find_elements_by_id(idname)[index].click()
+
+    def findByAccessibilityId(self,idname):
+        """iOS通过name定位"""
+        d = self.driver.find_element_by_accessibility_id(idname)
+        return d
+
+    def findByXpath(self,xpath):
+        """通过xpath定位"""
+        d = self.driver.find_element_by_xpath(xpath)
+        return d
+
+    def wait(self,n = 1):
+        return time.sleep(n)
+
+    def tapByLocation(self,x,y):
+        x = x / 375
+        y = y / 812
+        # 获取当前手机屏幕大小X,Y
+        # 获取当前手机屏幕大小X,Y
+        X = self.driver.get_window_size()['width']
+        Y = self.driver.get_window_size()['height']
+        # 屏幕坐标乘以系数即为用户要点击位置的具体坐标
+        print(X,Y,'===================')
+        return self.driver.execute_script("mobile: tap", {"x": x * X, "y": y * Y})
+
+    def goBack(self):
+        return self.driver.back()
+
+    def quit(self):
+        """设备退出"""
+        return self.driver.quit()

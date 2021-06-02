@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from baseview.baseview import BaseView
 from appium import webdriver
 from config import desired_caps

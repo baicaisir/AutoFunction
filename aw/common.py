@@ -93,7 +93,7 @@ def keywordListLogZip(loglist, keywordlist):
     return testlist
 
 
-def getClassProperty(classname, index):
+def getClassProperty(classname, index) -> object:
     """
     :function:通过class获取对应位置的属性
     :param classname: 控件的class名称
@@ -102,6 +102,10 @@ def getClassProperty(classname, index):
     """
 
     return md.getClasses(classname, index)
+
+def getValueById(name):
+    text = md.findByAccessibilityId(name).get_attribute('value')
+    return text
 
 def clickById(idname, index):
     """
@@ -118,3 +122,33 @@ def checkValue(value):
     :return:
     """
     assert value
+def clickByAccessibilityId(idname):
+    """
+    通过name点击控件
+    :param name:
+    :return:
+    """
+    return md.findByAccessibilityId(idname).click()
+
+def clickByXpath(xpath):
+    """
+    通过xpath点击控件
+    :param name:
+    :return:
+    """
+    return md.findByXpath(xpath).click()
+
+def wait(t = 1):
+    return md.wait(t)
+
+def goBack(n = 1):
+    for i in range(n):
+        print('返回第%s次'%i)
+        md.goBack()
+        md.wait(1)
+
+def clickByLocation(x,y):
+    md.tapByLocation(x,y)
+
+def quit():
+    return md.quit()
