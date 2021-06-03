@@ -55,12 +55,14 @@ class BaseView:
         buttons = self.driver.find_elements_by_class_name(classname)
         return buttons[index]
 
-    def clickByid(self, idname, index):
-        return self.driver.find_elements_by_id(idname)[index].click()
-
     def findByAccessibilityId(self,idname):
         """iOS通过name定位"""
         d = self.driver.find_element_by_accessibility_id(idname)
+        return d
+
+    def findElementsByAccessibilityId(self,idname):
+        """iOS通过name定位"""
+        d = self.driver.find_elements_by_accessibility_id(idname)
         return d
 
     def findByXpath(self,xpath):
@@ -68,22 +70,25 @@ class BaseView:
         d = self.driver.find_element_by_xpath(xpath)
         return d
 
-    def wait(self,n = 1):
+    def wait(self,n):
         """等待时长，默认一秒"""
         self.driver.implicitly_wait(n)
         return time.sleep(n)
 
     def tapByLocation(self,x,y):
         """通过坐标点击"""
-        x = x / 375
-        y = y / 812
-        # 获取当前手机屏幕大小X,Y
         # 获取当前手机屏幕大小X,Y
         X = self.driver.get_window_size()['width']
         Y = self.driver.get_window_size()['height']
         # 屏幕坐标乘以系数即为用户要点击位置的具体坐标
-        print(X,Y,'===================')
-        return self.driver.execute_script("mobile: tap", {"x": x * X, "y": y * Y})
+        print('当前屏幕尺寸为（%s,%s）'%(X,Y))
+        return self.driver.execute_script("mobile: tap", {"x": x , "y": y})
+
+    def clickCenter(self):
+        """点击屏幕中心位置"""
+        X = self.driver.get_window_size()['width']
+        Y = self.driver.get_window_size()['height']
+        return self.driver.execute_script("mobile: tap", {"x": X/2, "y": Y/2})
 
     def goBack(self):
         """返回键"""

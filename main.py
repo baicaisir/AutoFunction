@@ -24,5 +24,5 @@ if __name__ == '__main__':
 
 
     #allure-pytest报告--
-    pytest.main(['--alluredir',f'./report/{filetime}/allure_raw','scripts/test_firebase.py'])
+    pytest.main(['--alluredir',f'./report/{filetime}/allure_raw','scripts/test_noxmobisdk.py'])
     subprocess.call(f'allure  serve ./report/{filetime}/allure_raw', shell=True)

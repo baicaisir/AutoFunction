@@ -1,5 +1,6 @@
+import os
 # AutoFunction根目录
-basepath = 'D:/02_project/'
+basepath,_ =  os.getcwd().split('AutoFunction')
 
 # log文件夹路径
 logdirpath = basepath + 'AutoFunction/resource/'

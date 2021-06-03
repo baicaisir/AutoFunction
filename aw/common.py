@@ -107,6 +107,14 @@ def getValueById(name):
     text = md.findByAccessibilityId(name).get_attribute('value')
     return text
 
+def clickById(idname, index):
+    """
+    :param idname:
+    :param index:
+    :return:
+    """
+    return md.clickByid(idname, index)
+
 def checkValue(value):
     """
     用来断言使用
@@ -121,6 +129,14 @@ def clickByAccessibilityId(idname):
     :return:
     """
     return md.findByAccessibilityId(idname).click()
+
+def clickElementsByAccessibilityId(idname,index=0):
+    """
+    通过name点击控件
+    :param name:
+    :return:
+    """
+    return md.findElementsByAccessibilityId(idname)[index].click()
 
 def clickByXpath(xpath):
     """
@@ -158,6 +174,17 @@ def clickByLocation(x,y):
     """
     md.tapByLocation(x,y)
 
+def clickCenter():
+    """点击屏幕中心位置"""
+    md.clickCenter()
+
 def quit():
     """设备退出"""
     return md.quit()
+
+def checkIdIsExist(idname):
+    """判断是否存在某个ID/name"""
+    if md.findElementsByAccessibilityId(idname):
+        return True
+    else:
+        return False
