@@ -107,14 +107,6 @@ def getValueById(name):
     text = md.findByAccessibilityId(name).get_attribute('value')
     return text
 
-def clickById(idname, index):
-    """
-    :param idname:
-    :param index:
-    :return:
-    """
-    return md.clickByid(idname, index)
-
 def checkValue(value):
     """
     用来断言使用
@@ -139,16 +131,33 @@ def clickByXpath(xpath):
     return md.findByXpath(xpath).click()
 
 def wait(t = 1):
+    """
+    执行等待
+    :param t:默认是一秒钟
+    :return:
+    """
     return md.wait(t)
 
 def goBack(n = 1):
+    """
+    返回键
+    :param n: 点击次数
+    :return:
+    """
     for i in range(n):
         print('返回第%s次'%i)
         md.goBack()
         md.wait(1)
 
 def clickByLocation(x,y):
+    """
+    通过页面坐标点击---ios
+    :param x: x轴坐标
+    :param y: y轴坐标
+    :return:
+    """
     md.tapByLocation(x,y)
 
 def quit():
+    """设备退出"""
     return md.quit()

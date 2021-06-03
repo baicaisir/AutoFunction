@@ -69,9 +69,12 @@ class BaseView:
         return d
 
     def wait(self,n = 1):
+        """等待时长，默认一秒"""
+        self.driver.implicitly_wait(n)
         return time.sleep(n)
 
     def tapByLocation(self,x,y):
+        """通过坐标点击"""
         x = x / 375
         y = y / 812
         # 获取当前手机屏幕大小X,Y
@@ -83,6 +86,7 @@ class BaseView:
         return self.driver.execute_script("mobile: tap", {"x": x * X, "y": y * Y})
 
     def goBack(self):
+        """返回键"""
         return self.driver.back()
 
     def quit(self):
