@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 import subprocess
 import re
 import platform
@@ -132,23 +133,32 @@ def checkValue(value):
     assert value
 
 
-def clickByAccessibilityId(idname):
+def clickById(name):
     """
     通过name点击控件
-    :param idname:
+    :param name:
     :return:
     """
-    return md.findByAccessibilityId(idname).click()
+    return md.findByAccessibilityId(name).click()
 
 
-def clickElementsByAccessibilityId(idname, index=0):
+def clickByIds(name, index=0):
     """
     通过name点击控件
-    :param idname:
+    :param name:
     :param index:
     :return:
     """
-    return md.findElementsByAccessibilityId(idname)[index].click()
+    return md.findElementsByAccessibilityId(name)[index].click()
+
+def click_by_class_name(classname, index=0):
+    """
+    通过classname点击控件
+    :param classname:
+    :param index:按照列表索引值格式，从0开始
+    :return:
+    """
+    return md.find_elements_by_class_name(classname)[index].click()
 
 
 def clickByXpath(xpath):
@@ -195,6 +205,29 @@ def clickCenter():
     """点击屏幕中心位置"""
     md.clickCenter()
 
+def terminateApp(id):
+    """
+    杀掉应用进程
+    :param id: iOS：Bundle ID ；Android：package
+    :return:
+    """
+    md.terminateApp(id)
+
+def activateApp(id):
+    """
+    启动应用
+    :param id: iOS：Bundle ID ；Android：package
+    :return:
+    """
+    md.activateApp(id)
+
+def backgroudApp(time):
+    """
+    回到回桌面一段时间后返回
+    :param time:
+    :return:
+    """
+    md.backgroudApp(time)
 
 def quit():
     """设备退出"""
@@ -239,3 +272,13 @@ def setWinProxy(host='127.0.0.1', post=8888, clear=False):
     else:
         subprocess.call(r'reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f && reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "%s:%s" /f'% (host, post), shell=True)
         print('设置代理成功')
+
+def openMitmweb(filepath=Model.logdirpath.proxypath):
+    """
+     启动mitmweb功能
+    :param filepath: 脚本路径
+    :return: 进程pid
+    """
+    p = subprocess.Popen('mitmweb -p 8888 -s %s'%filepath, shell=True, cwd=Model.logdirpath)
+    logging.info('mitmweb进程ID%s'%p.pid)
+    return p.pid

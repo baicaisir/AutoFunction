@@ -4,6 +4,7 @@
 # @File    : baseview.py
 # @Software: PyCharm
 import time
+import logging
 
 class BaseView:
     def __init__(self,  driver):
@@ -60,6 +61,11 @@ class BaseView:
         d = self.driver.find_element_by_accessibility_id(idname)
         return d
 
+    def find_elements_by_class_name(self,classname):
+        """iOS通过name定位"""
+        d = self.driver.find_elements_by_class_name(classname)
+        return d
+
     def findElementsByAccessibilityId(self,idname):
         """iOS通过name定位"""
         d = self.driver.find_elements_by_accessibility_id(idname)
@@ -68,6 +74,7 @@ class BaseView:
     def findByXpath(self,xpath):
         """通过xpath定位"""
         d = self.driver.find_element_by_xpath(xpath)
+        logging.debug('这个控件为：',d)
         return d
 
     def wait(self,n):
@@ -93,6 +100,19 @@ class BaseView:
     def goBack(self):
         """返回键"""
         return self.driver.back()
+
+    def backgroudApp(self,time=5):
+        """返回桌面"""
+        return self.driver.background_app(time)
+
+    def closeApp(self):
+        return self.driver.close_app()
+
+    def terminateApp(self, id):
+        return self.driver.terminate_app(id)
+
+    def activateApp(self,id):
+        return self.driver.activate_app(id)
 
     def quit(self):
         """设备退出"""
