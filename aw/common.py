@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
-import subprocess
-import re
 import platform
+import re
+import subprocess
+
 from baseview import md
 from model import Model
+
 
 def logcatIos(logname='iphone.log'):
     """
@@ -12,8 +14,10 @@ def logcatIos(logname='iphone.log'):
     :return:进程号
     """
     # p = subprocess.Popen('idevice_id -l', shell=True)
-    p = subprocess.Popen('idevicesyslog > %s' % logname, shell=True, cwd=Model.logdirpath)
+    p = subprocess.Popen('tidevice syslog > %s' % logname, shell=True, cwd=Model.logdirpath)
+    logging.info('log抓取pid为：%s' % p.pid)
     return p.pid
+
 
 # 日志抓取完成，杀掉进程
 def logcatIosKill(pid):
@@ -23,9 +27,9 @@ def logcatIosKill(pid):
     :return:
     """
     if platform.system() == 'Windows':
-        subprocess.call('taskkill /PID %s' % pid, shell=True)
+        subprocess.call('taskkill /PID %s -f -t' % pid, shell=True)
     else:
-        subprocess.call('kill %s' % pid, shell=True)
+        subprocess.call('kill -9 %s' % pid, shell=True)
     return True
 
 
@@ -112,16 +116,8 @@ def getClassProperty(classname, index) -> object:
 
 def getValueById(name):
     text = md.findByAccessibilityId(name).get_attribute('value')
+    logging.info(text)
     return text
-
-
-def clickById(idname, index):
-    """
-    :param idname:
-    :param index:
-    :return:
-    """
-    return md.clickByid(idname, index)
 
 
 def checkValue(value):
@@ -150,6 +146,7 @@ def clickByIds(name, index=0):
     :return:
     """
     return md.findElementsByAccessibilityId(name)[index].click()
+
 
 def click_by_class_name(classname, index=0):
     """
@@ -186,7 +183,7 @@ def goBack(n=1):
     :return:
     """
     for i in range(n):
-        print('返回第%s次' % i)
+        logging.info('返回第%s次' % i)
         md.goBack()
         md.wait(1)
 
@@ -205,21 +202,24 @@ def clickCenter():
     """点击屏幕中心位置"""
     md.clickCenter()
 
-def terminateApp(id):
+
+def terminateApp(idname):
     """
     杀掉应用进程
-    :param id: iOS：Bundle ID ；Android：package
+    :param idname: iOS：Bundle ID ；Android：package
     :return:
     """
-    md.terminateApp(id)
+    md.terminateApp(idname)
 
-def activateApp(id):
+
+def activateApp(idname):
     """
     启动应用
-    :param id: iOS：Bundle ID ；Android：package
+    :param idname: iOS：Bundle ID ；Android：package
     :return:
     """
-    md.activateApp(id)
+    md.activateApp(idname)
+
 
 def backgroudApp(time):
     """
@@ -228,6 +228,7 @@ def backgroudApp(time):
     :return:
     """
     md.backgroudApp(time)
+
 
 def quit():
     """设备退出"""
@@ -241,6 +242,7 @@ def checkIdIsExist(idname):
     else:
         return False
 
+
 def changeFileContent(pattern, repl, filepath):
     """
     利用正则替换文件内容
@@ -253,10 +255,11 @@ def changeFileContent(pattern, repl, filepath):
         buffer = f.read()
         pa1 = re.compile(pattern).findall(buffer)[0]
         filecontent = re.sub(pa1, repl, buffer)
-        print(filecontent)
+        logging.info(filecontent)
 
     with open(filepath, mode='w+', encoding='utf-8') as f:
         f.write(filecontent)
+
 
 def setWinProxy(host='127.0.0.1', post=8888, clear=False):
     """
@@ -267,18 +270,23 @@ def setWinProxy(host='127.0.0.1', post=8888, clear=False):
     :return:
     """
     if clear:
-        subprocess.call(r'reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 0 /f && reg add "HKCU\Softwae \Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "" /f', shell=True)
+        subprocess.call(
+            r'reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 0 /f && reg add "HKCU\Softwae \Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "" /f',
+            shell=True)
         print('清除系统代理成功')
     else:
-        subprocess.call(r'reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f && reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "%s:%s" /f'% (host, post), shell=True)
+        subprocess.call(
+            r'reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f && reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /d "%s:%s" /f' % (
+            host, post), shell=True)
         print('设置代理成功')
 
-def openMitmweb(filepath=Model.logdirpath.proxypath):
+
+def openMitmweb(filepath=Model.proxypath):
     """
      启动mitmweb功能
     :param filepath: 脚本路径
     :return: 进程pid
     """
-    p = subprocess.Popen('mitmweb -p 8888 -s %s'%filepath, shell=True, cwd=Model.logdirpath)
-    logging.info('mitmweb进程ID%s'%p.pid)
+    p = subprocess.Popen('mitmweb -p 8888 -s %s' % filepath, shell=True, cwd=Model.logdirpath)
+    logging.info('mitmweb进程ID%s' % p.pid)
     return p.pid

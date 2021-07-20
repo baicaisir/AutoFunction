@@ -19,6 +19,9 @@ class Noxmobi:
 
     class bannerbutton(object):
         id = 'Banner示例'
+        init = 'Init'
+        show = 'Show'
+        testmode = 'Test mode'
 
     class rewardbutton(object):
         id = 'RewardVideo示例'

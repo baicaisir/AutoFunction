@@ -5,7 +5,7 @@
 # @Software: PyCharm
 import time
 import logging
-
+import logging
 class BaseView:
     def __init__(self,  driver):
         self.driver = driver
@@ -88,7 +88,7 @@ class BaseView:
         X = self.driver.get_window_size()['width']
         Y = self.driver.get_window_size()['height']
         # 屏幕坐标乘以系数即为用户要点击位置的具体坐标
-        print('当前屏幕尺寸为（%s,%s）'%(X,Y))
+        logging.debug('当前屏幕尺寸为（%s,%s）'%(X,Y))
         return self.driver.execute_script("mobile: tap", {"x": x , "y": y})
 
     def clickCenter(self):
@@ -117,3 +117,7 @@ class BaseView:
     def quit(self):
         """设备退出"""
         return self.driver.quit()
+
+    def get_screenshot_as_file(self,name):
+        """设备截图"""
+        return self.driver.get_screenshot_as_file(name)

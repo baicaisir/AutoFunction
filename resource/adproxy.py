@@ -9,7 +9,7 @@ import pymysql
 
 from mitmproxy import http
 
-ad_source, ad_type, system = "AdMod", 4, "ios"
+ad_source, ad_type, system = "AdMob", 4, "ios"
 
 def getdata(ad_source, ad_type, system):
     db = pymysql.connect("10.8.1.200", "qaplatform", "qaplatform", "qaplatform")

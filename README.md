@@ -45,3 +45,6 @@ allure格式报告
 pytest —alluredir ./report/allure_raw
 #执行以下命令可以将报告用HTML格式打开
 allure serve report/allure_raw
+
+# **win驱动ios设备**
+tidevice wdaproxy -B com.facebook.WebDriverAgentRunner.nox.xctrunner --port 8200
