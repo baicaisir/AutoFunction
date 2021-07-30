@@ -19,10 +19,8 @@ def pytest_runtest_makereport(item):
 
     if report.when == 'call' or report.when == "setup":
         xfail = hasattr(report, 'wasxfail')
-        if (report.skipped and xfail) or (report.failed and not xfail):
+        if (report.skipped and xfail) or (report.failed and not xfail) or (report.passed and xfail):
             file_name = report.nodeid.replace("::", "_").replace("/", "_").replace(".py", "")+".png"
-            logging.debug('截图名称为：%s'%file_name)
-            # file_name = Model.logscreen + file_name
             file_name = './report/assets/' + file_name
             logging.debug('截图完整路径为：%s' % file_name)
             _capture_screenshot(file_name)

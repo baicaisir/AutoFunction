@@ -30,6 +30,7 @@ def logcatIosKill(pid):
         subprocess.call('taskkill /PID %s -f -t' % pid, shell=True)
     else:
         subprocess.call('kill -9 %s' % pid, shell=True)
+        subprocess.call("ps -ef | grep 'tidevice' | grep -v 'grep' |awk '{print $2}'| xargs kill -9", shell=True)
     return True
 
 
@@ -187,7 +188,6 @@ def goBack(n=1):
         md.goBack()
         md.wait(1)
 
-
 def clickByLocation(x, y):
     """
     通过页面坐标点击---ios
@@ -290,3 +290,4 @@ def openMitmweb(filepath=Model.proxypath):
     p = subprocess.Popen('mitmweb -p 8888 -s %s' % filepath, shell=True, cwd=Model.logdirpath)
     logging.info('mitmweb进程ID%s' % p.pid)
     return p.pid
+

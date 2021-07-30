@@ -24,8 +24,8 @@ class TestsetUp:
 
     def test_step(self):
         # common.wait(5)
-        common.clickById(Noxmobi.bannerbutton.testmode)
-        common.clickByLocation(40,40)
+        # common.clickById(Noxmobi.bannerbutton.testmode)
+        common.terminateApp(Noxmobi.bundle_id.bundleid)
 
     def teardown(self):
         common.quit()

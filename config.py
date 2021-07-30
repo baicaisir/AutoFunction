@@ -6,14 +6,18 @@
 
 
 desired_caps = {
+  "udid":"0477289bc8bd957105d40b8552d9c79275d71334",
   "deviceName": "iPhone X",
-  "platformVersion": "14.5",
-  "platformName": "ios",
+  # "udid":"4f0a0ad893f2e9465c009b558fb633f604c178e6",
+  # "deviceName": "Noxmobi 6sp",
+  "platformVersion": "14.4",
   "automationName": "XCUITest",
-  "udid": "auto",
-  # "resetKeyboard": "true",
-  # "unicodeKeyboard": "true",
-  # "clearSystemFiles": "true"
+  "platformName": "iOS",
+  "newCommandTimeout": "3600",
+  "skipLogCapture": "true",
+  "webDriverAgentUrl": "http://127.0.0.1:8200",
+  "usePrebuiltWDA": "true",
+  "useXctestrunFile": "false"
 }
 """
 请自行配置设备情况下面的为Android的部分配置

@@ -13,11 +13,14 @@ class Testnoxmobi:
     """ setup  """
 
     def setup_class(self):
+        logging.info('这是开始执行动作')
         # common.setWinProxy()
-        # self.pid = common.openMitmweb()
+        common.changeFileContent('system = (.*)', r'"AdMob", 4, "ios"', Model.proxypath)
+        self.pid = common.openMitmweb()
+        common.wait(20)
         self.pid1 = common.logcatIos(Model.firebaselog)
 
-    def test_ad_show(self):
+    def test_banner_show(self):
         logging.info('启动NoxmobiDemo')
         Noxmobisdk.openFirebaseButton()
         common.goBack(1)
@@ -38,7 +41,6 @@ class Testnoxmobi:
         assert banner
 
     def test_banner_nox_sdk_waterfall(self):
-        logging.info('cehsi ')
         banner = common.logBlockKeywordExist(Model.banner_nox_sdk_waterfall_request, Model.firebaselog)
         assert banner
 
@@ -46,39 +48,18 @@ class Testnoxmobi:
         banner = common.logBlockKeywordExist(Model.banner_nox_sdk_show, Model.firebaselog)
         assert banner
 
-    def test_banner_nox_sdk_click(self):
-        banner = common.logBlockKeywordExist(Model.banner_nox_sdk_click, Model.firebaselog)
-        assert banner
+    #
+    # def test_banner_nox_sdk_click(self):
+    #     banner = common.logBlockKeywordExist(Model.banner_nox_sdk_click, Model.firebaselog)
+    #     assert banner
 
     def teardown(self):
         pass
 
     def teardown_class(self):
+        logging.info('这是结尾清除动作')
         common.terminateApp(Noxmobi.bundle_id.bundleid)
         common.quit()
-        # common.logcatIosKill(self.pid)
+        common.logcatIosKill(self.pid)
         common.logcatIosKill(self.pid1)
-        # common.checkValue(text == 'Test mode')
 
-        # """ 插屏请求"""
-        # # common.clickById(Noxmobi.interbutton.id)
-        # common.wait(1)
-        # common.clickById(Noxmobi.interbutton.init)
-        # common.wait(10)
-        # common.clickById(Noxmobi.interbutton.show)
-
-        # common.wait(5)
-        # common.clickCenter()
-        # common.wait(5)
-        # a = common.checkIdIsExist('URL')
-        # print(a)
-        # common.checkValue(a)
-
-        # 通过坐标点击返回广告展示页
-        # common.clickByLocation(22, 22)
-        #
-        # # 广告关闭按钮位置
-        # logging.info('断言之后接着执行')
-        # common.wait(5)
-        # common.clickByLocation(20, 60)
-        # common.goBack(2)

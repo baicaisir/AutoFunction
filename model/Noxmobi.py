@@ -41,4 +41,4 @@ class Noxmobi:
         xpath = '//XCUIElementTypeSwitch[@name="RC 初始化"]'
 
     class bundle_id(object):
-        ID = 'com.noxgroup.talentedmusician'
+        bundleid = 'com.noxgroup.talentedmusician'

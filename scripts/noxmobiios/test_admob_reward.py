@@ -17,7 +17,7 @@ class Testnoxmobi:
         # self.pid = common.openMitmweb()
         self.pid1 = common.logcatIos(Model.firebaselog)
 
-    def test_ad_show(self):
+    def test_rewaid_show(self):
         logging.info('启动NoxmobiDemo')
         Noxmobisdk.openFirebaseButton()
         common.goBack(1)
