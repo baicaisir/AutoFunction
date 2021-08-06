@@ -38,14 +38,13 @@ class BaseView:
         for i in range(n):
             self.driver.swipe(x1, y1, x2, y1, t)
 
-    def swipRight(self, t=500, n=1):
+    def swipRight(self, t=500):
         """向右滑动屏幕"""
         window = self.driver.get_window_size()
         x1 = window['width'] * 0.25
         y1 = window['height'] * 0.5
         x2 = window['width'] * 0.75
-        for i in range(n):
-            self.driver.swipe(x1, y1, x2, y1, t)
+        return self.driver.swipe(x1, y1, x2, y1, t)
 
     def startActivity(self, activity):
         """启动应用"""
@@ -76,6 +75,10 @@ class BaseView:
         """通过xpath定位"""
         d = self.driver.find_element_by_xpath(xpath)
         logging.debug('这个控件为：', d)
+        return d
+
+    def findbyiospredicate(self,a):
+        d = self.driver.find_elements_by_ios_predicate(a)
         return d
 
     def wait(self, n):

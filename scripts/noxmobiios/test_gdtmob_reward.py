@@ -15,7 +15,7 @@ class Testnoxmobi:
     def setup_class(self):
         logging.info('这是开始执行动作')
         # common.setWinProxy()
-        common.changeFileContent('system = (.*)', r'"AdMob", 3, "ios"', Model.proxypath)
+        common.changeFileContent('system = (.*)', r'"GDTMob", 3, "ios"', Model.proxypath)
         self.pid = common.openMitmdump()
         common.wait(5)
         self.pid1 = common.logcatIos(Model.firebaselog)
@@ -27,14 +27,15 @@ class Testnoxmobi:
         """ reward请求  """
         common.clickById(Noxmobi.rewardbutton.id)
         common.clickById(Noxmobi.rewardbutton.init)
-        common.wait(10)
+        common.wait(15)
         common.clickById(Noxmobi.rewardbutton.show)
         common.wait(3)
-        text = common.getValueById(Noxmobi.rewardbutton.testmode)
-        common.checkValue(text == Noxmobi.rewardbutton.testmode)
-        common.clickById(Noxmobi.rewardbutton.testmode)
-        common.wait(10)
-        common.activateApp(Noxmobi.bundle_id.bundleid)
+        common.clickById(Noxmobi.gdtmob.downloadButtonname)
+        common.swipeDown()
+        common.wait(30)
+        common.clickById(Noxmobi.gdtmob.adclosename)
+        common.wait(2)
+        common.swipeDown()
 
     def test_reward_nox_sdk_request(self):
         """nox_sdk_request广告请求打点"""
@@ -49,13 +50,12 @@ class Testnoxmobi:
         reward = common.logBlockKeywordExist(Model.reward_nox_sdk_show, Model.firebaselog)
         assert reward
 
+    def test_reward_nox_sdk_click(self):
+        reward = common.logBlockKeywordExist(Model.reward_nox_sdk_click, Model.firebaselog)
+        assert reward
+
     def test_reward_nox_sdk_show_failed(self):
         Noxmobisdk.checkFailedMsg()
-
-    #
-    # def test_reward_nox_sdk_click(self):
-    #     reward = common.logBlockKeywordExist(Model.reward_nox_sdk_click, Model.firebaselog)
-    #     assert reward
 
     def teardown(self):
         pass

@@ -100,3 +100,7 @@ class Model:
 
     # third_mediation_banner_auto_refresh Max banner自动刷新时打点
     third_mediation_banner_auto_refresh = r'Event:third_mediation_banner_auto_refresh parameters:{[\d\D]*?ad_sdk_placement_type" = 4[\d\D]*?}'
+
+    #展示失败信息
+    nox_sdk_request_config_failed = r'config_req_fail_msg.*'
+    nox_sdk_waterfall_request_failed = r'mediation_req_err_msg.*'

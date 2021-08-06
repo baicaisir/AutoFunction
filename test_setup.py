@@ -18,15 +18,17 @@ class TestsetUp:
 
     def setup(self):
         # common.setWinProxy()
-        # self.pid = common.openMitmweb()
+        self.pid = common.openMitmdump()
         # self.pid1 = common.logcatIos(Model.firebaselog)
         logging.info('这是一个调试脚本')
 
     def test_step(self):
-        # common.wait(5)
-        # common.clickById(Noxmobi.bannerbutton.testmode)
-        common.terminateApp(Noxmobi.bundle_id.bundleid)
+        common.clickCenter()
+        common.wait(20)
+        # common.activateApp(Noxmobi.bundle_id.bundleid)
+        # common.swipeDown()
+        # common.clickById(Noxmobi.unityads.adclosename)
 
     def teardown(self):
         common.quit()
-        # common.logcatIosKill(self.pid1)/
+        common.logcatIosKill(self.pid)

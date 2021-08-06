@@ -16,6 +16,7 @@ class Noxmobi:
         id = 'Interstital示例'
         init = 'Init + SetDelegate'
         show = 'Show'
+        testmode = 'Test mode'
 
     class bannerbutton(object):
         id = 'Banner示例'
@@ -27,6 +28,7 @@ class Noxmobi:
         id = 'RewardVideo示例'
         init = 'Init + SetDelegate'
         show = 'Show'
+        testmode = 'Test mode'
 
     class testmodebutton(object):
         name = 'Test Mode'
@@ -42,3 +44,49 @@ class Noxmobi:
 
     class bundle_id(object):
         bundleid = 'com.noxgroup.talentedmusician'
+
+    class applovin(object):
+        adclickname = 'App Lovin Advertisement'
+        adclosename = 'Close Advertisement'
+
+    class facebook(object):
+        adclickname = 'icon clickable area'
+
+    class gdtmob(object):
+        adclickname = 'webView_id'
+        adclosename = 'closeButton_id'
+        downloadButtonname = 'downloadButton_id'
+
+    class googledfp(object):
+        # adclickname = 'webView_id'
+        adclosename = 'Close Advertisement'
+        # downloadButtonname = 'downloadButton_id'
+
+    class bytedance(object):
+        # adclickname = 'webView_id'
+        adclosename = 'endcard_close'
+        adrewardclosename = 'landingpage_close'
+        # downloadButtonname = 'downloadButton_id'
+
+    class ironsource(object):
+        downloadButtonname = 'DOWNLOAD NOW'
+
+    class mopub(object):
+        adclosename = '完成'
+        adrewardclosename = 'Close ad'
+        adclickname = 'Tap to test this ad.'
+
+    class unityads(object):
+        adclosename = 'Close'
+        adclickname = '免费下载'
+
+    class vungle(object):
+        adclosename = 'Close'
+        adclickname = 'banner'
+        vunglename = 'Vungle'
+
+    class startapp(object):
+        adclickname = 'StartApp'
+
+    class kuaishou(object):
+        adclickname = '广告'

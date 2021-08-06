@@ -15,7 +15,7 @@ class Testnoxmobi:
     def setup_class(self):
         logging.info('这是开始执行动作')
         # common.setWinProxy()
-        common.changeFileContent('system = (.*)', r'"AdMob", 3, "ios"', Model.proxypath)
+        common.changeFileContent('system = (.*)', r'"GoogleDFP", 3, "ios"', Model.proxypath)
         self.pid = common.openMitmdump()
         common.wait(5)
         self.pid1 = common.logcatIos(Model.firebaselog)

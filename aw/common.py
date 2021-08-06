@@ -130,6 +130,15 @@ def checkValue(value):
     assert value
 
 
+def swipeDown(t=500, n=1):
+    """
+    屏幕向下滑动
+    :param t: 滑动时长
+    :param n: 滑动次数
+    :return:t
+    """
+    md.swipeDown(t,n)
+
 def clickById(name):
     """
     通过name点击控件
@@ -167,6 +176,10 @@ def clickByXpath(xpath):
     """
     return md.findByXpath(xpath).click()
 
+def clickByiosPredicate(a):
+    return md.findbyiospredicate(a)[0].click()
+
+
 
 def wait(t=1):
     """
@@ -184,7 +197,7 @@ def goBack(n=1):
     :return:
     """
     for i in range(n):
-        logging.info('返回第%s次' % i)
+        logging.info('返回第%s次' % (i+1))
         md.goBack()
         md.wait(1)
 
@@ -255,7 +268,7 @@ def changeFileContent(pattern, repl, filepath):
         buffer = f.read()
         pa1 = re.compile(pattern).findall(buffer)[0]
         filecontent = re.sub(pa1, repl, buffer)
-        logging.info(filecontent)
+        # logging.info(filecontent)
 
     with open(filepath, mode='w+', encoding='utf-8') as f:
         f.write(filecontent)
@@ -289,5 +302,15 @@ def openMitmweb(filepath=Model.proxypath):
     """
     p = subprocess.Popen('mitmweb -p 8888 -s %s' % filepath, shell=True, cwd=Model.logdirpath)
     logging.info('mitmweb进程ID%s' % p.pid)
+    return p.pid
+
+def openMitmdump(filepath=Model.proxypath):
+    """
+     启动mitmweb功能
+    :param filepath: 脚本路径
+    :return: 进程pid
+    """
+    p = subprocess.Popen('mitmdump -p 8888 -s %s' % filepath, shell=True, cwd=Model.logdirpath)
+    logging.info('mitmdump进程ID%s' % p.pid)
     return p.pid
 

@@ -15,9 +15,9 @@ class Testnoxmobi:
     def setup_class(self):
         logging.info('这是开始执行动作')
         # common.setWinProxy()
-        common.changeFileContent('system = (.*)', r'"AdMob", 4, "ios"', Model.proxypath)
+        common.changeFileContent('system = (.*)', r'"MoPub", 4, "ios"', Model.proxypath)
         self.pid = common.openMitmdump()
-        common.wait(10)
+        common.wait(2)
         self.pid1 = common.logcatIos(Model.firebaselog)
 
     def test_banner_show(self):
@@ -27,13 +27,13 @@ class Testnoxmobi:
         """ banner请求"""
         common.clickById(Noxmobi.bannerbutton.id)
         common.clickById(Noxmobi.bannerbutton.init)
-        common.wait(10)
+        common.wait(15)
         common.clickById(Noxmobi.bannerbutton.show)
-        common.wait(3)
-        text = common.getValueById(Noxmobi.bannerbutton.testmode)
-        common.checkValue(text == Noxmobi.bannerbutton.testmode)
-        common.clickById(Noxmobi.bannerbutton.testmode)
-        common.activateApp(Noxmobi.bundle_id.bundleid)
+        common.wait(5)
+        common.clickById(Noxmobi.mopub.adclickname)
+        common.wait(2)
+        common.clickById(Noxmobi.mopub.adclosename)
+
 
     def test_banner_nox_sdk_request(self):
         """nox_sdk_request广告请求打点"""
@@ -48,13 +48,13 @@ class Testnoxmobi:
         banner = common.logBlockKeywordExist(Model.banner_nox_sdk_show, Model.firebaselog)
         assert banner
 
-    def test_banner_nox_sdk_show_failed(self):
-        Noxmobisdk.checkFailedMsg()
+    def test_banner_nox_sdk_click(self):
+        banner = common.logBlockKeywordExist(Model.banner_nox_sdk_click, Model.firebaselog)
+        assert banner
 
-    #
-    # def test_banner_nox_sdk_click(self):
-    #     banner = common.logBlockKeywordExist(Model.banner_nox_sdk_click, Model.firebaselog)
-    #     assert banner
+    def test_banner_nox_sdk_show_failed(self):
+        # 可以看成这个打点的检测 nox_sdk_request_config
+        Noxmobisdk.checkFailedMsg()
 
     def teardown(self):
         pass

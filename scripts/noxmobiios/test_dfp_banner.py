@@ -15,7 +15,7 @@ class Testnoxmobi:
     def setup_class(self):
         logging.info('这是开始执行动作')
         # common.setWinProxy()
-        common.changeFileContent('system = (.*)', r'"AdMob", 4, "ios"', Model.proxypath)
+        common.changeFileContent('system = (.*)', r'"GoogleDFP", 4, "ios"', Model.proxypath)
         self.pid = common.openMitmdump()
         common.wait(10)
         self.pid1 = common.logcatIos(Model.firebaselog)
@@ -30,10 +30,6 @@ class Testnoxmobi:
         common.wait(10)
         common.clickById(Noxmobi.bannerbutton.show)
         common.wait(3)
-        text = common.getValueById(Noxmobi.bannerbutton.testmode)
-        common.checkValue(text == Noxmobi.bannerbutton.testmode)
-        common.clickById(Noxmobi.bannerbutton.testmode)
-        common.activateApp(Noxmobi.bundle_id.bundleid)
 
     def test_banner_nox_sdk_request(self):
         """nox_sdk_request广告请求打点"""
